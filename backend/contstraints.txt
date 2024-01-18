@@ -1,0 +1,3 @@
+Topicul poate fi creat doar de admin.
+Posturile nu pot conține cuvinte discriminatoare.
+Dacă userul are este guest posturile lui nu pot avea mai mult de 1 imagine, dacă are cont cu email ne verificat - nu mai mult de 5 imagini, cu email verificat - 10 imagini.
