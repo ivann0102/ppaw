@@ -61,10 +61,17 @@ public class PostService : IPostService
         {
             return 0;
         }
-        postsAccessor.CreatePost(post);
-        foreach (string image in images)
+        try
         {
-            postsAccessor.AddImage(post.PostId, image);
+            postsAccessor.CreatePost(post);
+            foreach (string image in images)
+            {
+                postsAccessor.AddImage(post.PostId, image);
+            }
+        }
+        catch (Exception e)
+        {
+            logger.LogError("Error creating post: " + e.Message);
         }
         return 1;
     }
@@ -80,9 +87,16 @@ public class PostService : IPostService
 
     public int Update(int userId, int postId, Post newPost)
     {
-        var key = "post" + $"_{postId}";
-        cacheManager.Remove(key);
-        postsAccessor.UpdatePost(postId, newPost);
+        try
+        {
+            var key = "post" + $"_{postId}";
+            cacheManager.Remove(key);
+            postsAccessor.UpdatePost(postId, newPost);
+        }
+        catch (Exception e)
+        {
+            logger.LogError("Error editing post: " + e.Message);
+        }
         return 1;
     }
 
@@ -92,11 +106,18 @@ public class PostService : IPostService
         var userRole = userService.GetUserRole(userId);
         if (post != null && (post.UserId == userId || userRole == "admin"))
         {
-            postsAccessor.DeletePost(postId);
-            var key = "post" + $"_{postId}";
-            cacheManager.Remove(key);
+            try
+            {
+                postsAccessor.DeletePost(postId);
+                var key = "post" + $"_{postId}";
+                cacheManager.Remove(key);
 
-            return 1;
+                return 1;
+            }
+            catch (Exception e)
+            {
+                logger.LogError("Error deleting post: " + e.Message);
+            }
         }
         return 0;
     }
