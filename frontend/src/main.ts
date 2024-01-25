@@ -15,6 +15,9 @@ import {
   VaCardTitle,
   VaCardContent,
   VaSelect,
+  VaNavbar,
+  VaNavbarItem,
+  VaIcon,
 } from "vuestic-ui";
 import "vuestic-ui/styles/essential.css";
 import "vuestic-ui/styles/typography.css";
@@ -46,6 +49,9 @@ app.use(
       VaCardTitle,
       VaCard,
       VaSelect,
+      VaNavbar,
+      VaNavbarItem,
+      VaIcon,
     },
   })
 );

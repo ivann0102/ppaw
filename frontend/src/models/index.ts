@@ -1,40 +1,40 @@
 export class User {
-  constructor(
-    public userId: number,
-    public userName: string,
-    public email: string,
-    public imageLink: string,
-    public authType: string,
-    public role: string
-  ) {}
+  public userId: number | undefined;
+  public userName: string | undefined;
+  public email: string | undefined;
+  public imageLink: string | undefined;
+  public authType: string | undefined;
+  public role: string | undefined;
+}
+
+export class LoginModel {
+  public userName: string | undefined;
+  public password: string | undefined;
 }
 
 export class Post {
-  constructor(
-    public postId: number | undefined,
-    public heading: string = "",
-    public postText: string = "",
-    public postDate: Date | undefined,
-    public topicId: number = 0,
-    public userId: number = 0,
-    public parentPostId: number | undefined,
-    public topic: string | undefined,
-    public user: string | undefined,
-    public images: string[] | undefined
-  ) {}
+  public postId: number | undefined;
+  public heading: string = "";
+  public postText: string = "";
+  public postDate: Date | undefined;
+  public topicId: number = 0;
+  public userId: number = 0;
+  public parentPostId: number | undefined;
+  public topic: string | undefined;
+  public user: string | undefined;
+  public postImages: string[] | undefined;
 }
 
 export class PostModel {
-  constructor(
-    public heading: string = "",
-    public postText: string = "",
-    public parentPostId: number = 0,
-    public topicId: number = 0,
-    public userId: number = 0,
-    public topic: string | undefined,
-    public user: string | undefined
-  ) {}
+  public heading: string = "";
+  public postText: string = "";
+  public parentPostId: number = 0;
+  public topicId: number = 0;
+  public userId: number = 0;
+  public topic: string | undefined;
+  public user: string | undefined;
 }
 export class Topic {
-  constructor(public topicId: number, public topicName: string) {}
+  public topicId: number | undefined;
+  public topicName: string | undefined;
 }

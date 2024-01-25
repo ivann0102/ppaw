@@ -21,12 +21,20 @@ function createPost() {
     let post: Post = new Post();
     if (heading.value != undefined)
         post.heading = heading.value
-    if (topic.value != undefined)
+    if (topic.value != undefined
+        && topic.value.topicId != undefined)
         post.topicId = topic.value.topicId
     if (text.value != undefined)
         post.postText = text.value
-    post.userId = 1
-    post.images = images.value
+
+    let user = localStorage.getItem("user");
+    if (user != null)
+        post.userId = Number(user);
+    else {
+        post.userId = -1;
+    }
+
+    post.postImages = images.value
     fetch(`/api/Posts/${post.userId}`, {
         method: "post",
         headers: {
@@ -34,8 +42,19 @@ function createPost() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(post)
-    }).then((response) => console.log(response.status))
+    }).then((response) => {
+        console.log(response.status)
+        clear()
+    })
 }
+
+function clear() {
+    text.value = ""
+    topics.value = []
+    images.value = []
+    topic.value = new Topic()
+}
+
 </script>
 <template>
     <div class="flex flex-col gap-5 justify-center p-5 w-1/2 shadow-lg m-auto bg-lime-50">

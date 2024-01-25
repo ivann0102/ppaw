@@ -25,6 +25,14 @@ public class UsersAccessor : IUsersAccessor
       .FirstOrDefault(user => user.UserId == id);
   }
 
+  public User? GetUserByName(string username)
+  {
+    return context.Users
+      .Include(u => u.Role)
+      .Include(u => u.AuthType)
+      .FirstOrDefault(user => user.UserName == username);
+  }
+
   public void CreateUser(User user)
   {
     context.Users.Add(user);

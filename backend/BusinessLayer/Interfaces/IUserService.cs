@@ -8,6 +8,7 @@ public interface IUserService
   User? GetUser(int userId);
   string GetUserRole(int userId);
   string GetUserAuthType(int userId);
-
+  bool IsValidUser(string username, string password);
+  User? GetUserByName(string username);
 }
 

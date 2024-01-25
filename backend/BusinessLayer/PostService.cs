@@ -1,6 +1,7 @@
 using NiveAccessDate_CodeFirst;
 using LibrarieModele;
 using System.Text.RegularExpressions;
+using Microsoft.Extensions.Logging;
 
 
 namespace BusinessLayer;
@@ -10,28 +11,30 @@ public class PostService : IPostService
     private readonly IPostsAccessor postsAccessor;
     private readonly IUserService userService;
     private readonly ICache cacheManager;
-    public PostService(IPostsAccessor postsAccessor, IUserService userService, ICache cacheManager)
+    private readonly ILogger<PostService> logger;
+
+    public PostService(
+        IPostsAccessor postsAccessor,
+        IUserService userService, ICache cacheManager,
+        ILogger<PostService> logger)
     {
         this.postsAccessor = postsAccessor;
         this.userService = userService;
         this.cacheManager = cacheManager;
+        this.logger = logger;
+        this.logger.LogInformation("Nlog injected into PostService");
     }
 
-    private bool IsAlloweNumberOfPosts(int userId, int imageCount)
+    private bool IsAllowedNumberOfImages(int userId, int imageCount)
     {
-        string authType = userService.GetUserAuthType(userId);
-
         int maxCount = 0;
 
-        if (userId == -1)
-            maxCount = 1;
-
-        if (authType == "Registered")
-            maxCount = 3;
-
-        if (authType == "EmailVerified")
-            maxCount = 5;
-
+        User? user = userService.GetUser(userId);
+        if (user != null)
+        {
+            maxCount = user.AuthType.Limitation;
+            return false;
+        }
         return imageCount <= maxCount;
     }
 
@@ -52,8 +55,8 @@ public class PostService : IPostService
     public int Create(int userId, Post post, List<string> images)
     {
         if (
-            !IsAlloweNumberOfPosts(userId, postsAccessor.CountPostImages(post.PostId)) &&
-            HasBadWords(post.PostText) &&
+            !IsAllowedNumberOfImages(userId, images.Count) ||
+            HasBadWords(post.PostText) ||
             HasBadWords(post.Heading))
         {
             return 0;
@@ -77,11 +80,6 @@ public class PostService : IPostService
 
     public int Update(int userId, int postId, Post newPost)
     {
-        if (!IsAlloweNumberOfPosts(userId, postsAccessor.CountPostImages(newPost.PostId)))
-        {
-            return 0;
-        }
-
         var key = "post" + $"_{postId}";
         cacheManager.Remove(key);
         postsAccessor.UpdatePost(postId, newPost);

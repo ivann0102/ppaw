@@ -11,7 +11,9 @@ public class TopicsController : Controller
 {
   private IPostService postService;
   private ITopicService topicService;
-  public TopicsController(IPostService postService, ITopicService topicService)
+  public TopicsController(
+    IPostService postService, 
+    ITopicService topicService)
   {
     this.postService = postService;
     this.topicService = topicService;
@@ -20,7 +22,7 @@ public class TopicsController : Controller
   [HttpGet()]
   public IEnumerable<TopicViewModel> Get()
   {
-    List<Topic> topics = postService.GetTopics();
+    List<Topic> topics = topicService.GetAll();
     Console.WriteLine(topics.Count);
     var topicModels = topics.Select(t => new TopicViewModel
     {
@@ -36,5 +38,14 @@ public class TopicsController : Controller
     List<Post> posts = postService.GetPostsByTopic(topicId);
     var postModels = posts.Select(p => new PostViewModel(p)).ToList();
     return postModels;
+  }
+
+  [HttpPost("{userId}")]
+  public IActionResult CreateTopic(int userId, TopicViewModel topic)
+  {
+    int result = topicService.Create(userId, new Topic(){ TopicName = topic.TopicName });
+    if(result == 0)
+      return StatusCode(403);
+    return Ok();
   }
 }

@@ -43,7 +43,7 @@ public class PostsController : Controller
     }
 
     [HttpPost("{userId:int}")]
-    public void CreatePost(int userId, PostViewModel post)
+    public IActionResult CreatePost(int userId, PostViewModel post)
     {
         Post newPost;
         if (post.ParentPostId != null)
@@ -54,7 +54,7 @@ public class PostsController : Controller
                 PostDate = DateOnly.FromDateTime(DateTime.Now),
                 TopicId = post.TopicId,
                 UserId = userId,
-                ParentPostId = post.ParentPostId
+                ParentPostId = post.ParentPostId,
             };
         else
             newPost = new Post
@@ -69,18 +69,22 @@ public class PostsController : Controller
         if (post.PostImages == null)
             post.PostImages = new List<string>();
 
-        postService.Create(
+        int result = postService.Create(
             userId,
             newPost,
             post.PostImages
         );
+        if(result==0){
+            return StatusCode(403);
+        }
+        return Ok();
     }
 
     [HttpPut("{id:int}/{userId:int}")]
-    public void EditPost(int id, int userId, PostViewModel post)
+    public IActionResult  EditPost(int id, int userId, PostViewModel post)
     {
         Console.WriteLine($"{id} {post.PostDate.ToString()}");
-        postService.Update(
+        int result = postService.Update(
             userId,
             id,
             new Post
@@ -93,6 +97,10 @@ public class PostsController : Controller
                 ParentPostId = post.ParentPostId
             }
         );
+        if(result == 0){
+            return StatusCode(403);
+        }
+        return Ok();
     }
 
     [HttpDelete("{id:int}/{userId:int}")]

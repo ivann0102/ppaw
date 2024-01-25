@@ -89,3 +89,7 @@ body {
   /* --va-input-font-size: 2em; */
   --va-card-font-size: 2em;
 }
+
+body{
+  height: 100%;
+}

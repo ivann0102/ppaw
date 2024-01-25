@@ -42,9 +42,20 @@ public class UsersController : Controller
   }
 
   [HttpDelete("{userId:int}")]
-  public void DeletePost(int userId)
+  public void DeleteUser(int userId)
   {
     userService.Delete(userId);
   }
+
+  [HttpPost("login")]
+  public UserViewModel? Login(LoginViewModel user)
+  {
+    if(userService.IsValidUser(user.UserName, user.Password)){
+      return new UserViewModel(userService.GetUserByName(user.UserName));
+    }
+    return null;
+  }
+
+
 }
 

@@ -46,6 +46,31 @@ public class UserService : IUserService
     }
     return user;
   }
+
+  public bool IsValidUser(string username, string password)
+  {
+    User user = GetUserByName(username);
+    if(user!=null)
+      return user.PasswordHash == password;
+    return false;
+  }
+  
+  public User? GetUserByName(string username)
+  {
+    User user;
+    var key = "user_" + $"{username}";
+    if (cacheManager.IsSet(key))
+    {
+      user = cacheManager.Get<User>(key);
+    }
+    user = usersAccessor.GetUserByName(username);
+    if (user != null)
+    {
+      cacheManager.Set(key, user);
+    }
+    return user;
+  }
+
   public string GetUserRole(int userId)
   {
     var key = "user_role" + $"{userId}";

@@ -9,4 +9,5 @@ public interface IUsersAccessor
   void CreateUser(User user);
   List<Role> GetRoles();
   void RemoveUser(int userId);
+  User? GetUserByName(string username);
 }

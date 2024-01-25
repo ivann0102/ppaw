@@ -1,0 +1,20 @@
+2024-01-25 12:59:33.9804 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-01-25 12:59:34.0245 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2024-01-25 12:59:34.0258 Info Registered target NLog.Targets.ConsoleTarget(Name=lifetimeConsole)
+2024-01-25 12:59:34.0692 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-01-25 12:59:34.1125 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=54, FilePath=/home/user/Documents/projects/usv/web/sandbox/output/finalProj/backend/ApiForum/bin/Debug/net7.0/nlog.config
+2024-01-25 12:59:34.1683 Info Configuration initialized.
+2024-01-25 12:59:34.5352 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=54, FilePath=/home/user/Documents/projects/usv/web/sandbox/output/finalProj/backend/ApiForum/bin/Debug/net7.0/nlog.config
+2024-01-25 13:00:05.1283 Info Shutdown() called. Logger closing...
+2024-01-25 13:00:05.1283 Info Closing old configuration.
+2024-01-25 13:00:05.1450 Info Logger has been closed down.
+2024-01-25 13:01:20.1521 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-01-25 13:01:20.1827 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2024-01-25 13:01:20.1827 Info Registered target NLog.Targets.ConsoleTarget(Name=lifetimeConsole)
+2024-01-25 13:01:20.2108 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-01-25 13:01:20.2341 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=54, FilePath=/home/user/Documents/projects/usv/web/sandbox/output/finalProj/backend/ApiForum/bin/Debug/net7.0/nlog.config
+2024-01-25 13:01:20.2682 Info Configuration initialized.
+2024-01-25 13:01:20.5123 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=54, FilePath=/home/user/Documents/projects/usv/web/sandbox/output/finalProj/backend/ApiForum/bin/Debug/net7.0/nlog.config
+2024-01-25 13:03:04.2433 Info Shutdown() called. Logger closing...
+2024-01-25 13:03:04.2433 Info Closing old configuration.
+2024-01-25 13:03:04.2569 Info Logger has been closed down.

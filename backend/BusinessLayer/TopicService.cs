@@ -20,7 +20,8 @@ public class TopicService : ITopicService
     public int Create(int userId, Topic topic)
     {
         string userRole = userService.GetUserRole(userId);
-        if (userRole != "admin")
+        Console.WriteLine("Role: "+userRole);
+        if (userRole != "Admin")
             return 0;
 
         topicsAccessor.CreateTopic(topic);
@@ -30,7 +31,8 @@ public class TopicService : ITopicService
     public int Delete(int userId, int topicId)
     {
         string userRole = userService.GetUserRole(userId);
-        if (userRole != "admin")
+        Console.WriteLine("Role:"+userRole);
+        if (userRole != "Admin")
             return 0;
 
         topicsAccessor.DeleteTopic(topicId);

@@ -31,6 +31,7 @@ public class UserViewModel
     ImageLink = user.ImageLink != null ? user.ImageLink : "";
     AuthType = user.AuthType.AuthTypeName;
     Role = user.Role.RoleName;
+    PasswordHash = user.PasswordHash;
   }
   public UserViewModel() { }
 }
